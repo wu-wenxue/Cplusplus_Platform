@@ -1,7 +1,0 @@
-#include "basethread.h"
-
-basethread::basethread(bool bDetach)
-{
-    
-}
-

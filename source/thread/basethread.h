@@ -5,8 +5,8 @@
 class basethread
 {
 public:
-    basethread(bool bDetach = true);
-    virtual ~basethread();
+    basethread(bool bDetach = true){}
+    virtual ~basethread(){}
 
 
 };
