@@ -1,5 +1,6 @@
 #include "thread_linux.h"
 
+#if defined(__unix__) || defined(unix)
 CThread::CThread()
 {
     tid = 0;
@@ -24,7 +25,9 @@ void CThread::Stop()
 {
     if(tid)
     {
+#if defined(__unix__) || defined(unix)
         pthread_join(tid,NULL);
+#endif
         tid = 0;
         pid = 0;
     }
@@ -43,6 +46,7 @@ int CThread::getthreadid()
 int CThread::CreateThread(pthread_t *threadid,void *pfunction, void* arg)
 {
     int ret = 0;
+#if defined(__unix__) || defined(unix)
     pthread_attr_t attr;
     pthread_attr_init(&attr);
 
@@ -56,8 +60,8 @@ int CThread::CreateThread(pthread_t *threadid,void *pfunction, void* arg)
     }
 
     pthread_create(threadid,&attr,(void*(*)(void*))pfunction, arg);
-
     pthread_attr_destroy(&attr);
+#endif
 
     return ret;
 }
@@ -75,5 +79,6 @@ void* CThread::hook(void* arg)
 
 pid_t CThread::gettid()
 {
-    return syscall(__NR_gettid);
+    return 0 ;//syscall(__NR_gettid);
 }
+#endif

@@ -1,9 +1,11 @@
 #ifndef THREAD_LINUX_H
 #define THREAD_LINUX_H
 
+#if defined(__unix__) || defined(unix)
 #include <pthread.h>
 #include <unistd.h>
 #include <sys/syscall.h>
+
 #include <iostream>
 
 class Runnable
@@ -36,6 +38,6 @@ private:
 
     Runnable* runnable;
 };
-
+#endif
 
 #endif // THREAD_LINUX_H

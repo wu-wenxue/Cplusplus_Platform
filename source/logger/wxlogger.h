@@ -14,7 +14,7 @@ typedef enum LogLevel
 {
     INFO = 0,
     WARN,
-    ERROR,
+    ERR,
     FATAL,
 }loglevel;
 
@@ -28,7 +28,7 @@ public:
     void WxLog(loglevel level, ostringstream& oss);
 
 protected:
-    string GetCurrentTime();
+    string GetCurrentTime_();
     string GetCurrentTime_byms();
     string GetCurrentTime_byus();
     string m_Name;
@@ -51,7 +51,7 @@ protected:
 #define WXLOG_ERROR(logger,message) { \
     ostringstream oss; \
     oss << message;   \
-    logger->WxLog(ERROR,oss);}
+    logger->WxLog(ERR,oss);}
 
 #define WXLOG_FATAL(logger,message) { \
     ostringstream oss; \

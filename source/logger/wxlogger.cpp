@@ -39,7 +39,7 @@ void Wxlogger::WxLog(loglevel level, ostringstream &oss)
         }
     }
         break;
-    case ERROR:
+    case ERR:
     {
         if(outfile.is_open())
         {
@@ -61,21 +61,15 @@ void Wxlogger::WxLog(loglevel level, ostringstream &oss)
 
 }
 
-
-
-string Wxlogger::GetCurrentTime()
+string Wxlogger::GetCurrentTime_()
 {
     struct tm* ct;   //tm结构指针
-    time_t now;  //声明time_t类型变量
-//    time(&now);      //获取系统日期和时间
     const time_t t = time(NULL);
-//    localtime(&t, &now);   //获取当地日期和时间
     ct = localtime(&t);
     char temp[50] = {0};
-    sprintf(temp,"[%d-%d-%d %d:%d:%d]" ,ct->tm_year + 1900,ct->tm_mon + 1,ct->tm_mday,ct->tm_hour,ct->tm_min,ct->tm_sec);
-    std::string  pTemp=temp;
-    return pTemp;
+    sprintf(temp,"%d-%d-%d %d:%d:%d" ,ct->tm_year + 1900,ct->tm_mon + 1,ct->tm_mday,ct->tm_hour,ct->tm_min,ct->tm_sec);
 
+    return string(temp);
 }
 
 string Wxlogger::GetCurrentTime_byms()
@@ -117,7 +111,7 @@ string Wxlogger::GetCurrentTime_byus()
     SYSTEMTIME wtm;
     GetLocalTime(&wtm);
 
-    ms = wtm.wMilliseconds*1000;
+    us = wtm.wMilliseconds*1000;
 #endif
 
     struct tm* stm;
