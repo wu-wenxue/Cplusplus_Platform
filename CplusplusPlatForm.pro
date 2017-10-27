@@ -13,8 +13,7 @@ HEADERS += \
     unit_test/thread_test.hpp \
     source/logger/wxlogger.h \
     unit_test/test.hpp \
-    source/time/time_manage.h \
-    thread_cxx11.h
+    source/time/time_manage.h
 
 SOURCES += \
     source/platform.cpp \
@@ -23,8 +22,7 @@ SOURCES += \
     source/thread/thread_linux.cpp \
     main.cpp \
     source/logger/wxlogger.cpp \
-    source/time/time_manage.cpp \
-    thread_cxx11.cpp
+    source/time/time_manage.cpp
 
 
 CONFIG += c++11
