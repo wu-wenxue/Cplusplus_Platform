@@ -7,20 +7,20 @@
 
 int test_log()
 {
-    Wxlogger *logger = new Wxlogger("test.log");
+//    Wxlogger *logger = new Wxlogger();
 
 //    logger.WxLog(INFO,"testlog : " << 123456);
     ostringstream os;
     os << "testlog : " << 123456;
-    logger->WxLog(INFO,os);
+//    logger->WxLog(INFO,os);
 
-    WXLOG_INFO(logger,"testlog : " << 123456);
+    WXLOG_INFO("testlog : " << 123456);
 
-    WXLOG_WARN(logger,"testlog WARN : " << 121455);
+    WXLOG_WARN("testlog WARN : " << 121455);
 
-    WXLOG_ERROR(logger,"testlog ERROR : " << 121575);
+    WXLOG_ERROR("testlog ERROR : " << 121575);
 
-    WXLOG_FATAL(logger,"testlog FATAL : " << 125674);
+    WXLOG_FATAL("testlog FATAL : " << 125674);
 
     return 0;
 }

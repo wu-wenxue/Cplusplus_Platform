@@ -2,7 +2,8 @@ TARGET = C++platfrom
 
 
 INCLUDEPATH += ./source \
-               ./unit_test
+               ./unit_test \
+               ./deploy/curllib/include
 
 
 HEADERS += \
@@ -17,7 +18,9 @@ HEADERS += \
     source/common/common.h \
     source/thread/thread_windows.h \
     source/IPC/socket/tcp_client.h \
-    source/IPC/socket/tcp_server.h
+    source/IPC/socket/tcp_server.h \
+    unit_test/http_test.hpp \
+    source/http/http_client.h
 
 SOURCES += \
     source/platform.cpp \
@@ -31,7 +34,8 @@ SOURCES += \
     source/common/common.cpp \
     source/thread/thread_windows.cpp \
     source/IPC/socket/tcp_client.cpp \
-    source/IPC/socket/tcp_server.cpp
+    source/IPC/socket/tcp_server.cpp \
+    source/http/http_client.cpp
 
 
 CONFIG += c++11
@@ -39,5 +43,7 @@ CONFIG += c++11
 
 LIBS += -lwsock32
 LIBS += -lpthread libwsock32 libws2_32
+//LIBS += -L./deploy/curllib/lib/ -lcurldll
+LIBS += E:\Project\C++\Cplusplus_Platform\deploy\curllib\lib\libcurl.dll
 
-QMAKE_CXXFLAGS += -Wall -march=x86-64 -mmmx
+QMAKE_CXXFLAGS += -Wall -march=x86-64 -mmmx -lcurl -lws2_32 -lwinmm -lwldap32

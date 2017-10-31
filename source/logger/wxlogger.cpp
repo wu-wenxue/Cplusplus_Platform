@@ -1,6 +1,7 @@
 #include "wxlogger.h"
 #include <fstream>"
 #include <stdio.h>
+#include <iostream>
 
 #if defined(__unix__) || defined(unix)
 #include <sys/time.h>
@@ -10,9 +11,30 @@
 #include <windows.h>
 #endif
 
+Wxlogger* Wxlogger::_instance = NULL;
+
 Wxlogger::Wxlogger(string name)
 {
+    if(name.empty())
+    {
+        std::cout << "ERROR : log filename is null !!!!" << std::endl;
+    }
     m_Name = name;
+}
+
+//void Wxlogger::SetLogName(string path,string filename)
+//{
+//    m_Path = path;
+//    m_Name = filename;
+//}
+
+Wxlogger* Wxlogger::getInstance(string Name )
+{
+    if(NULL == _instance)
+    {
+        _instance = new Wxlogger(Name);
+    }
+    return _instance;
 }
 
 void Wxlogger::WxLog(loglevel level, ostringstream &oss)

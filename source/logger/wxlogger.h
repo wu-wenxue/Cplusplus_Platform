@@ -22,12 +22,15 @@ typedef enum LogLevel
 class Wxlogger
 {
 public:
-    Wxlogger(string name);
+    static Wxlogger* getInstance(string Name = NULL);
+//    static void SetLogName(string path,string filename);
+
     ~Wxlogger();
 
     void WxLog(loglevel level, ostringstream& oss);
 
 protected:
+    Wxlogger(string name);
     string GetCurrentTime_();
     string GetCurrentTime_byms();
     string GetCurrentTime_byus();
@@ -35,25 +38,30 @@ protected:
     string m_Path;
     mutex mut;
 
-
+private:
+    static Wxlogger* _instance;
 };
 
-#define WXLOG_INFO(logger,message) { \
+#define WXLOG_INFO(message) { \
+    Wxlogger* logger = Wxlogger::getInstance(); \
     ostringstream oss; \
     oss << message;   \
     logger->WxLog(INFO,oss);}
 
-#define WXLOG_WARN(logger,message) { \
+#define WXLOG_WARN(message) { \
+    Wxlogger* logger = Wxlogger::getInstance(); \
     ostringstream oss; \
     oss << message;   \
     logger->WxLog(WARN,oss);}
 
-#define WXLOG_ERROR(logger,message) { \
+#define WXLOG_ERROR(message) { \
+    Wxlogger* logger = Wxlogger::getInstance(); \
     ostringstream oss; \
     oss << message;   \
     logger->WxLog(ERR,oss);}
 
-#define WXLOG_FATAL(logger,message) { \
+#define WXLOG_FATAL(message) { \
+    Wxlogger* logger = Wxlogger::getInstance(); \
     ostringstream oss; \
     oss << message;   \
     logger->WxLog(FATAL,oss);}
