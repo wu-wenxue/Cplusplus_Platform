@@ -2,8 +2,8 @@ TARGET = C++platfrom
 
 
 INCLUDEPATH += ./source \
-               ./unit_test \
-               ./deploy/windows/curllib/include
+               ./unit_test
+
 
 
 HEADERS += \
@@ -20,7 +20,10 @@ HEADERS += \
     source/IPC/socket/tcp_client.h \
     source/IPC/socket/tcp_server.h \
     unit_test/http_test.hpp \
-    source/http/http_client.h
+    source/http/http_client.h \
+    source/IPC/socket/tcp_linux.h \
+    source/time/sntp.hpp \
+    source/IPC/socket/epoll_server.h
 
 SOURCES += \
     source/platform.cpp \
@@ -35,15 +38,38 @@ SOURCES += \
     source/thread/thread_windows.cpp \
     source/IPC/socket/tcp_client.cpp \
     source/IPC/socket/tcp_server.cpp \
-    source/http/http_client.cpp
+    source/http/http_client.cpp \
+    source/IPC/socket/tcp_linux.cpp \
+    source/IPC/socket/epoll_server.cpp
+
+win32{
+
+INCLUDEPATH += ./deploy/windows/curllib/include
+
+LIBS += -lwsock32
+LIBS += -lpthread libwsock32 libws2_32
+LIBS += E:\Project\C++\Cplusplus_Platform\deploy\windows\curllib\lib\libcurl.dll
+
+}
+
+unix{
+
+INCLUDEPATH += /usr/local/include   \
+               /usr/include
+
+LIBS += -L/usr/local/lib \
+        -L/usr/lib   \
+        -lcrypto -lssl -Wl,-rpath,/usr/local/lib \
+        -lcurl
+}
 
 
 CONFIG += c++11
 
 
-LIBS += -lwsock32
-LIBS += -lpthread libwsock32 libws2_32
-#LIBS += -L./deploy/curllib/lib/ -lcurldll
-LIBS += E:\Project\C++\Cplusplus_Platform\deploy\windows\curllib\lib\libcurl.dll
 
-QMAKE_CXXFLAGS += -Wall -march=x86-64 -mmmx -lcurl -lws2_32 -lwinmm -lwldap32
+LIBS += -lpthread
+#LIBS += -L./deploy/curllib/lib/ -lcurldll
+
+
+QMAKE_CXXFLAGS += -Wall -march=x86-64 -mmmx -lws2_32 -lwinmm -lwldap32

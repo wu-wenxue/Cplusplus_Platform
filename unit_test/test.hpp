@@ -2,7 +2,7 @@
 #define TEST_HPP
 #include "logger/wxlogger.h"
 #include "ping/ping.h"
-//#include "thread/thread_linux.h"
+#include "thread/thread_linux.h"
 #include "thread/thread_windows.h"
 
 int test_log()
@@ -28,6 +28,7 @@ int test_log()
 
 int test_ping()
 {
+#ifdef WIN32
     Ping objPing;
 
     char *szDestIP = "192.168.8.1";
@@ -40,6 +41,7 @@ int test_ping()
         printf("Reply from %s: bytes=%d time=%ldms TTL=%ld\n", szDestIP, reply.m_dwBytes, reply.m_dwRoundTripTime, reply.m_dwTTL);
         Sleep(500);
     }
+#endif
 
     return 0;
 }
@@ -59,12 +61,13 @@ public:
 
 void test_thread_windows()
 {
+#ifdef WIN32
     R r;
     CThread *t = NULL;
     t = new CThread(&r);
     t->Start();
     t->Join();
-
+#endif
 }
 
 
@@ -74,8 +77,8 @@ void test_thread_windows()
 
 void test_socket_client()
 {
+#ifdef WIN32
     TCPClient* client = new TCPClient("192.168.8.111",80);
-    client->Init();
     client->Connect();
     string str = "GET /FTP/SBox-3G_-LE_-20171101120000.tar.gz HTTP/1.1  \
             Host: 192.168.8.111:81  \
@@ -88,6 +91,7 @@ void test_socket_client()
             \
             ";
     client->onSendMessage(str);
+#endif
 }
 
 

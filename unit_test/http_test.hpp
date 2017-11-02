@@ -24,6 +24,7 @@ void http_test()
 
 }
 
+#if 0
 void fun1()
 {
     struct curl_slist *headers=NULL; /* init to NULL is important */
@@ -392,5 +393,5 @@ int main5(int c, char **argv) {
 
 
 
-
+#endif
 #endif // HTTP_TEST_HPP

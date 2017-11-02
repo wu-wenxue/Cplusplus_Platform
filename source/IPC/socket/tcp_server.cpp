@@ -1,5 +1,8 @@
 #include "tcp_server.h"
 #include <iostream>
+
+#ifdef WIN32
+
 using namespace wwx;
 Server::Server(int port)
 {
@@ -108,3 +111,5 @@ SOCKET Server::GetClientSocket()
 {
 	return sockConn;
 }
+
+#endif

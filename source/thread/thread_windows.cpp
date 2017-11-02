@@ -1,5 +1,7 @@
 #include "thread_windows.h"
 
+#ifdef WIN32
+
 CThread::CThread(void): m_bRun(false)
 {
 
@@ -138,5 +140,5 @@ unsigned int CThread::StaticThreadFunc(void* arg)
 }
 
 
-
+#endif
 

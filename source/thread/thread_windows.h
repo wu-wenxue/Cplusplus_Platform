@@ -2,6 +2,8 @@
 #define THREAD_WINDOWS_H
 
 #include <string>
+
+#ifdef WIN32
 #include <windows.h>
 #include <process.h>
 
@@ -74,5 +76,5 @@ private:
 };
 
 
-
+#endif
 #endif // THREAD_WINDOWS_H

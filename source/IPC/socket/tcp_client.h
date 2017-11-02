@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
-//#include <windows.h>
+
+#ifdef WIN32
+#include <windows.h>
 #include <WinSock2.h>
 #include <fstream>
 
@@ -40,4 +42,6 @@ private:
 
 
 };
+
+#endif
 

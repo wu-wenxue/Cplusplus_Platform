@@ -1,8 +1,12 @@
 #pragma once
-#include <WinSock2.h>  
-#include <stdio.h>  
-#include <stdlib.h>  
+
+#include <stdio.h>
+#include <stdlib.h>
 #include <string>
+
+#ifdef _WIN32
+#include <WinSock2.h>  
+
 
 #pragma comment(lib, "ws2_32.lib")  
 namespace wwx
@@ -35,3 +39,5 @@ namespace wwx
 		int m_port;
 	};
 }
+
+#endif

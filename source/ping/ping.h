@@ -1,6 +1,7 @@
 #ifndef PING_H
 #define PING_H
 
+#ifdef _WIN32
 //在默认windows.h会包含winsock.h，当你包含winsock2.h就会冲突，因此在包含windows.h前需要定义一个宏,#define WIN32_LEAN_AND_MEAN ;去除winsock.h
 //要么将#include <winsock2.h>放在#include<windows.h>前面或者直接去掉#include<windows.h>
 
@@ -68,5 +69,5 @@ private:
     static USHORT s_usPacketSeq;
 
 };
-
+#endif
 #endif // PING_H

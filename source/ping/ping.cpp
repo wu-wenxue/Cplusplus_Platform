@@ -1,7 +1,10 @@
 #include "ping.h"
+#include <iostream>
+
+#ifdef _WIN32
 #include <windows.h>
 
-#include <iostream>
+
 USHORT Ping::s_usPacketSeq = 0;
 
 
@@ -198,3 +201,4 @@ ULONG Ping::GetTickCountCalibrate()
 
     return s_ulFirstCallTick + (ULONG)(llCurrentTimeMS - s_ullFirstCallTickMS);
 }
+#endif

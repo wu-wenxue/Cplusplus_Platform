@@ -2,6 +2,8 @@
 
 #include <thread>
 
+#ifdef _WIN32
+
 TCPClient::TCPClient(std::string server_ip, int port)
 {
 	m_server_ip = server_ip;
@@ -121,3 +123,5 @@ SOCKET TCPClient::GetSocket()
 {
 	return sockClient;
 }
+
+#endif
