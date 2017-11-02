@@ -1,8 +1,8 @@
 #include "tcp_client.h"
 
 #include <thread>
-using namespace wwx;
-Client::Client(std::string server_ip, int port)
+
+TCPClient::TCPClient(std::string server_ip, int port)
 {
 	m_server_ip = server_ip;
 	m_port = port;
@@ -10,15 +10,14 @@ Client::Client(std::string server_ip, int port)
 }
 
 
-Client::~Client()
+TCPClient::~TCPClient()
 {
 
 }
 
-bool Client::Init()
+bool TCPClient::Init()
 {
 	//WSADATA wsaData;
-
 	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
 	{
 		std::cout << "Failed to load Winsock" << std::endl;
@@ -38,7 +37,7 @@ bool Client::Init()
 	return true;
 }
 
-bool Client::Connect()
+bool TCPClient::Connect()
 {
 	if (connect(sockClient, (struct sockaddr*)&addrSrv, sizeof(addrSrv)) == INVALID_SOCKET)
 	{
@@ -51,24 +50,24 @@ bool Client::Connect()
 	return true;
 }
 /*
-void Client::StartRecvProcess(WebSocket_Client* ws_client)
+void TCPClient::StartRecvProcess(WebSocket_Client* ws_client)
 {
 	std::thread t(onRecvMessage, ws_client);
 	t.detach();
 }
 */
 
-void Client::onSendMessage(std::string message)
+void TCPClient::onSendMessage(std::string message)
 {
 	std::cout << "send : " << message.c_str() << std::endl;
 	send(sockClient, message.data(), message.length(), 0);
 
 }
 
-void Client::onRecvMessage(void* instance)
+void TCPClient::onRecvMessage(void* instance)
 {
 	std::cout << "recv thread is start ...." << std::endl;
-	Client* client = static_cast<Client*>(instance);
+    TCPClient* client = static_cast<TCPClient*>(instance);
 	char recv_buf[1024];
 	while (1)
 	{
@@ -94,7 +93,7 @@ void Client::onRecvMessage(void* instance)
 	}
 }
 
-int Client::Recv(std::string& recv_message)
+int TCPClient::Recv(std::string& recv_message)
 {
 	char recv_buf[1024] = { 0 };
 	int count = 0;
@@ -111,13 +110,14 @@ int Client::Recv(std::string& recv_message)
 	return count;
 }
 
-void Client::close()
+void TCPClient::close()
 {
+
 	closesocket(sockClient);
 	WSACleanup();
 }
 
-SOCKET Client::GetSocket()
+SOCKET TCPClient::GetSocket()
 {
 	return sockClient;
 }

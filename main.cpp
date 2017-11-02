@@ -3,6 +3,7 @@
 #include "test.hpp"
 #include "logger/wxlogger.h"
 #include "unit_test/http_test.hpp"
+#include "common/common.h"
 
 using namespace std;
 
@@ -16,5 +17,6 @@ int main()
     test2();
     http_test();
 
+    wxsleep(5);
     cout << "hello" << endl;
 }

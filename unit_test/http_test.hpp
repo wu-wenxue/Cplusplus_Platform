@@ -20,6 +20,8 @@ void http_test()
     hc.Post("http://192.168.8.111:8080/CheckVersion/test",strPost,response);
     WXLOG_WARN(logger,"http Post response : " << response);
 
+    hc.Download("http://192.168.8.111/FTP/Images.zip","test.zip");
+
 }
 
 void fun1()

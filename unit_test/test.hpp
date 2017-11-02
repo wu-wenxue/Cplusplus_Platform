@@ -68,6 +68,29 @@ void test_thread_windows()
 }
 
 
+
+
+#include "IPC/socket/tcp_client.h"
+
+void test_socket_client()
+{
+    TCPClient* client = new TCPClient("192.168.8.111",80);
+    client->Init();
+    client->Connect();
+    string str = "GET /FTP/SBox-3G_-LE_-20171101120000.tar.gz HTTP/1.1  \
+            Host: 192.168.8.111:81  \
+            User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0  \
+            Accept: */*  \
+            Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3  \
+            Accept-Encoding: gzip, deflate  \
+            Connection: keep-alive  \
+            \
+            \
+            ";
+    client->onSendMessage(str);
+}
+
+
 void test2()
 {
     test_log();

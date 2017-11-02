@@ -1,6 +1,7 @@
 #include "http_client.h"
 #include <curl/curl.h>
 #include <string>
+#include <iostream>
 
 HttpClient::HttpClient():m_bDebug(false)
 {
@@ -187,6 +188,65 @@ int HttpClient::Gets(const std::string & strUrl, std::string & strResponse, cons
     curl_easy_cleanup(curl);
     return res;
 
+}
+
+static size_t httpDownloadHandler(void* data,size_t size,size_t nmemb, void* stream)
+{
+    std::cout << "httpDownloadHandler" <<std::endl;
+    FILE* file = (FILE*)stream;
+
+    if(file)
+    {
+        return fwrite(data,size,nmemb,file);
+    }
+    return -1;
+}
+
+int HttpClient::Download(const std::string& strUrl,const char* file)
+{
+    FILE* fp;
+    short ec = 0;
+    long code = 0;
+    CURL* curl;
+    CURLcode status;
+
+    if(strUrl.empty() || NULL == file)
+    {
+        return -1;
+    }
+
+    fp = fopen(file,"w");
+    if(NULL == fp)
+    {
+        return -1;
+    }
+
+    curl = curl_easy_init();
+    if( NULL == curl)
+    {
+        fclose(fp);
+        return -1;
+    }
+
+    curl_easy_setopt(curl,CURLOPT_URL,strUrl.c_str());
+    curl_easy_setopt(curl,CURLOPT_TIMEOUT,60);
+    curl_easy_setopt(curl,CURLOPT_WRITEFUNCTION,httpDownloadHandler);
+    curl_easy_setopt(curl,CURLOPT_WRITEDATA,fp);
+    curl_easy_setopt(curl,CURLOPT_SSL_VERIFYPEER,0L);
+    curl_easy_setopt(curl,CURLOPT_SSL_VERIFYHOST,0L);
+
+    status = curl_easy_perform(curl);
+    curl_easy_getinfo(curl,CURLINFO_RESPONSE_CODE,&code);
+    if(!(200 == code && CURLE_OK == status))
+    {
+        return -1;
+    }
+
+    curl_easy_cleanup(curl);
+    fflush(fp);
+    fclose(fp);
+
+    return 0;
 }
 
 void HttpClient::SetDebug(bool bDebug)

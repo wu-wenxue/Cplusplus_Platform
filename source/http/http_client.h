@@ -47,6 +47,8 @@ public:
     */
     int Gets(const std::string & strUrl, std::string & strResponse, const char * pCaPath = NULL);
 
+
+    int Download(const std::string& strUrl,const char* file);
 public:
     void SetDebug(bool bDebug);
 

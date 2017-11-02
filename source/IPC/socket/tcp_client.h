@@ -2,43 +2,42 @@
 #include <iostream>
 //#include <windows.h>
 #include <WinSock2.h>
+#include <fstream>
 
 #pragma comment(lib, "ws2_32.lib") 
 
-namespace wwx
+
+
+class TCPClient
 {
+public:
+    TCPClient(std::string server_ip, int port);
+    ~TCPClient();
 
-	class Client
-	{
-	public:
-		Client(std::string server_ip, int port);
-		~Client();
+    bool Init();
 
-		bool Init();
+    bool Connect();
 
-		bool Connect();
+    void onSendMessage(std::string message);
 
-		void onSendMessage(std::string message);
+    //	void StartRecvProcess(WebSocket_Client* ws_client);
 
-		//	void StartRecvProcess(WebSocket_Client* ws_client);
+    static void onRecvMessage(void* instance);
 
-		static void onRecvMessage(void* instance);
+    int Recv(std::string& recv_message);
+    void close();
 
-		int Recv(std::string& recv_message);
-		void close();
+    SOCKET GetSocket();
 
-		SOCKET GetSocket();
+private:
 
-	private:
+    std::string m_server_ip;
+    int m_port;
 
-		std::string m_server_ip;
-		int m_port;
-
-		WSADATA wsaData;
-		SOCKADDR_IN addrSrv;
-		SOCKET sockClient;
+    WSADATA wsaData;
+    SOCKADDR_IN addrSrv;
+    SOCKET sockClient;
 
 
-	};
+};
 
-}
