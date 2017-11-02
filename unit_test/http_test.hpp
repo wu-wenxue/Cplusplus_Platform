@@ -4,14 +4,32 @@
 #include "curl/curl.h"
 #include "curl/easy.h"
 
+#include "http/http_client.h"
+#include "logger/wxlogger.h"
+
+void http_test()
+{
+    Wxlogger* logger = Wxlogger::getInstance();
+    HttpClient hc;
+    std::string response;
+    hc.Get("http://192.168.8.111:8080/CheckVersion/test",response);
+    WXLOG_WARN(logger,"http get response : " << response);
+
+    response.clear();
+    std::string strPost = "{\"test\":\"test123\"}";
+    hc.Post("http://192.168.8.111:8080/CheckVersion/test",strPost,response);
+    WXLOG_WARN(logger,"http Post response : " << response);
+
+}
+
 void fun1()
 {
     struct curl_slist *headers=NULL; /* init to NULL is important */
     headers = curl_slist_append(headers, "Hey-server-hey: how are you?");
     headers = curl_slist_append(headers, "X-silly-content: yes");
     /* pass our list of custom made headers */
-    curl_easy_setopt(easyhandle, CURLOPT_HTTPHEADER, headers);
-    curl_easy_perform(easyhandle); /* transfer http */
+//    curl_easy_setopt(easyhandle, CURLOPT_HTTPHEADER, headers);
+//    curl_easy_perform(easyhandle); /* transfer http */
     curl_slist_free_all(headers); /* free the header list */
 
     // 对于已经存在的消息头，可以重新设置它的值：
@@ -270,7 +288,7 @@ size_t getcontentlengthfunc(void *ptr, size_t size, size_t nmemb, void *stream) 
 
        /* _snscanf() is Win32 specific */
        // r = _snscanf(ptr, size * nmemb, "Content-Length: %ld\n", &len);
- r = sscanf(ptr, "Content-Length: %ld\n", &len);
+ r = sscanf((const char*)ptr, "Content-Length: %ld\n", &len);
        if (r) /* Microsoft: we don't read the specs */
               *((long *) stream) = len;
 
@@ -280,20 +298,19 @@ size_t getcontentlengthfunc(void *ptr, size_t size, size_t nmemb, void *stream) 
 /* 保存下载文件 */
 size_t wirtefunc(void *ptr, size_t size, size_t nmemb, void *stream)
 {
-        return fwrite(ptr, size, nmemb, stream);
+        return fwrite(ptr, size, nmemb, (FILE*)stream);
 }
 
 /*读取上传文件 */
 size_t readfunc(void *ptr, size_t size, size_t nmemb, void *stream)
 {
-       FILE *f = stream;
+       FILE *f = (FILE*)stream;
        size_t n;
 
        if (ferror(f))
               return CURL_READFUNC_ABORT;
 
-       n = fread(ptr, size, nmemb, f) * size;
-
+       n = fread((FILE*)ptr, size, nmemb, f) * size;
        return n;
 }
 

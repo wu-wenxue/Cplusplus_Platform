@@ -30,3 +30,11 @@ void wxsleep_ms(unsigned int n)
     Sleep(n);
 #endif
 }
+
+
+void trimString(std::string &str)
+{
+    int s = str.find_first_not_of(" ");
+    int e = str.find_last_not_of(" ");
+    str = str.substr(s,e-s+1);
+}

@@ -3,7 +3,7 @@ TARGET = C++platfrom
 
 INCLUDEPATH += ./source \
                ./unit_test \
-               ./deploy/curllib/include
+               ./deploy/windows/curllib/include
 
 
 HEADERS += \
@@ -43,7 +43,7 @@ CONFIG += c++11
 
 LIBS += -lwsock32
 LIBS += -lpthread libwsock32 libws2_32
-//LIBS += -L./deploy/curllib/lib/ -lcurldll
-LIBS += E:\Project\C++\Cplusplus_Platform\deploy\curllib\lib\libcurl.dll
+#LIBS += -L./deploy/curllib/lib/ -lcurldll
+LIBS += E:\Project\C++\Cplusplus_Platform\deploy\windows\curllib\lib\libcurl.dll
 
 QMAKE_CXXFLAGS += -Wall -march=x86-64 -mmmx -lcurl -lws2_32 -lwinmm -lwldap32

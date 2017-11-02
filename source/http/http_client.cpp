@@ -1,7 +1,6 @@
 #include "http_client.h"
 #include <curl/curl.h>
 #include <string>
-#include "logger/wxlogger.h"
 
 HttpClient::HttpClient():m_bDebug(false)
 {
@@ -15,25 +14,26 @@ HttpClient::~HttpClient()
 
 static int OnDebug(CURL*, curl_infotype itype,char* pData,size_t size, void*)
 {
+    Wxlogger* logger = Wxlogger::getInstance();
     if(itype == CURLINFO_TEXT)
     {
-        WXLOG_WARN("[TEXT] : " << pData);
+        WXLOG_WARN(logger,"[TEXT] : " << pData);
     }
     else if (itype == CURLINFO_HEADER_IN)
     {
-        WXLOG_WARN("[HEADER_IN] : " << pData);
+        WXLOG_WARN(logger,"[HEADER_IN] : " << pData);
     }
     else if(itype == CURLINFO_HEADER_OUT)
     {
-        WXLOG_WARN("[HEADER_OUT] : " << pData);
+        WXLOG_WARN(logger,"[HEADER_OUT] : " << pData);
     }
     else if(itype == CURLINFO_DATA_IN)
     {
-        WXLOG_WARN("[DATA_IN] : " << pData);
+        WXLOG_WARN(logger,"[DATA_IN] : " << pData);
     }
     else if(itype == CURLINFO_DATA_OUT)
     {
-        WXLOG_WARN("[DATA_OUT] : " << pData);
+        WXLOG_WARN(logger,"[DATA_OUT] : " << pData);
     }
 
     return 0;

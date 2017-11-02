@@ -1,6 +1,7 @@
 #ifndef HTTP_CLIENT_H
 #define HTTP_CLIENT_H
 #include <string>
+#include "logger/wxlogger.h"
 
 
 class HttpClient

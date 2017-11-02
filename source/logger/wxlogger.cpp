@@ -13,26 +13,32 @@
 
 Wxlogger* Wxlogger::_instance = NULL;
 
-Wxlogger::Wxlogger(string name)
+Wxlogger::Wxlogger()
 {
-    if(name.empty())
+
+}
+
+void Wxlogger::SetLogName(string path,string filename)
+{
+    m_Path = path;
+    if(filename.empty())
     {
         std::cout << "ERROR : log filename is null !!!!" << std::endl;
     }
-    m_Name = name;
+    m_Name = filename;
 }
 
-//void Wxlogger::SetLogName(string path,string filename)
-//{
-//    m_Path = path;
-//    m_Name = filename;
-//}
+void Wxlogger::SetLogLevel(loglevel level)
+{
+    m_level = level;
+}
 
-Wxlogger* Wxlogger::getInstance(string Name )
+Wxlogger* Wxlogger::getInstance()
 {
     if(NULL == _instance)
     {
-        _instance = new Wxlogger(Name);
+        std::cout << "debug : " << "getInstance" << std::endl;
+        _instance = new Wxlogger();
     }
     return _instance;
 }
@@ -47,6 +53,8 @@ void Wxlogger::WxLog(loglevel level, ostringstream &oss)
     {
     case INFO:
     {
+        if(level < m_level) break;
+
         if(outfile.is_open())
         {
             outfile << "[INFO ] " << this->GetCurrentTime_byms().data()  <<" : "<< oss.str() << std::endl;
@@ -55,6 +63,7 @@ void Wxlogger::WxLog(loglevel level, ostringstream &oss)
         break;
     case WARN:
     {
+        if(level < m_level) break;
         if(outfile.is_open())
         {
             outfile << "[WARN ] " << this->GetCurrentTime_byms().data()  <<" : "<< oss.str() << std::endl;
@@ -63,6 +72,7 @@ void Wxlogger::WxLog(loglevel level, ostringstream &oss)
         break;
     case ERR:
     {
+        if(level < m_level) break;
         if(outfile.is_open())
         {
             outfile << "[ERROR] " << this->GetCurrentTime_byms().data()  <<" : "<< oss.str() << std::endl;
@@ -71,11 +81,14 @@ void Wxlogger::WxLog(loglevel level, ostringstream &oss)
         break;
     case FATAL:
     {
+        if(level < m_level) break;
         if(outfile.is_open())
         {
             outfile << "[FATAL] " << this->GetCurrentTime_byms().data()  <<" : "<< oss.str() << std::endl;
         }
     }
+        break;
+    default:
         break;
     }
     outfile.close();

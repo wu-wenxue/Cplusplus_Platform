@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include "common/common.h"
 
 #define COMMENT_CHAR '#'
 
@@ -12,7 +13,6 @@ Config::Config()
 
 }
 
-
 Config* Config::getInstance()
 {
     if(NULL == _instance)
@@ -20,13 +20,6 @@ Config* Config::getInstance()
         _instance = new Config();
     }
     return _instance;
-}
-
-void trimString(std::string &str)
-{
-    int s = str.find_first_not_of(" ");
-    int e = str.find_last_not_of(" ");
-    str = str.substr(s,e-s+1);
 }
 
 
