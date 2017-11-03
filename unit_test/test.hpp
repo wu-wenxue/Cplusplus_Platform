@@ -61,7 +61,7 @@ public:
 
 void test_thread_windows()
 {
-#ifdef WIN32
+#ifdef _WIN32
     R r;
     CThread *t = NULL;
     t = new CThread(&r);
@@ -94,14 +94,19 @@ void test_socket_client()
 #endif
 }
 
+#include "json_test.hpp"
+
 
 void test2()
 {
-    test_log();
-    std::cout << "Hello World" << endl;
-    test_ping();
+//    test_log();
+//    std::cout << "Hello World" << endl;
+//    test_ping();
 
-    test_thread_windows();
+//    test_thread_windows();
+
+    jsontest();
+
 }
 
 #endif // TEST_HPP

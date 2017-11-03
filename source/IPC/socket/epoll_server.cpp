@@ -2,6 +2,8 @@
 #include "epoll_server.h"
 #include <memory.h>
 
+#if defined(__unix__) || defined(unix)
+
 EpollServer::EpollServer()
 {
     m_listen_sock = 0;
@@ -234,3 +236,5 @@ void EpollServer::run(int time_out)
         }
     }
 }
+
+#endif

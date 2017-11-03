@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <memory.h>
 
+#if defined(__unix__) || defined(unix)
+
 TCPClient::TCPClient(std::string server_ip,int port)
 {
     m_serverIp = server_ip;
@@ -212,3 +214,5 @@ int TCPServer::getClientSocket()
 {
     return sockConn;
 }
+
+#endif

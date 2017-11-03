@@ -1,6 +1,7 @@
 #ifndef TCP_LINUX_H
 #define TCP_LINUX_H
 
+#if defined(__unix__) || defined(unix)
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <iostream>
@@ -67,5 +68,5 @@ private:
     int m_port;
 };
 
-
+#endif
 #endif // TCP_LINUX_H

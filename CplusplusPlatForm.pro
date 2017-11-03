@@ -23,7 +23,25 @@ HEADERS += \
     source/http/http_client.h \
     source/IPC/socket/tcp_linux.h \
     source/time/sntp.hpp \
-    source/IPC/socket/epoll_server.h
+    source/IPC/socket/epoll_server.h \
+    source/json/config.h \
+    source/json/json.h \
+    source/json/reader.h \
+    source/json/value.h \
+    source/json/writer.h \
+    source/json/autolink.h \
+    source/json/features.h \
+    source/json/forwards.h \
+    source/json/json_batchallocator.h \
+    source/threadpool/BusyThreadContainer.h \
+    source/threadpool/IdleThreadContainer.h \
+    source/threadpool/MyTask.h \
+    source/threadpool/MyThread.h \
+    source/threadpool/MyThreadPool.h \
+    source/threadpool/Task.h \
+    source/threadpool/TaskContainer.h \
+    unit_test/threadpool_test.hpp \
+    unit_test/json_test.hpp
 
 SOURCES += \
     source/platform.cpp \
@@ -40,7 +58,20 @@ SOURCES += \
     source/IPC/socket/tcp_server.cpp \
     source/http/http_client.cpp \
     source/IPC/socket/tcp_linux.cpp \
-    source/IPC/socket/epoll_server.cpp
+    source/IPC/socket/epoll_server.cpp \
+    source/json/json_reader.cpp \
+    source/json/json_value.cpp \
+    source/json/json_writer.cpp \
+    source/json/json_internalarray.inl \
+    source/json/json_internalmap.inl \
+    source/json/json_valueiterator.inl \
+    source/threadpool/BusyThreadContainer.cpp \
+    source/threadpool/IdleThreadContainer.cpp \
+    source/threadpool/MyTask.cpp \
+    source/threadpool/MyThread.cpp \
+    source/threadpool/MyThreadPool.cpp \
+    source/threadpool/Task.cpp \
+    source/threadpool/TaskContainer.cpp
 
 win32{
 
@@ -73,3 +104,11 @@ LIBS += -lpthread
 
 
 QMAKE_CXXFLAGS += -Wall -march=x86-64 -mmmx -lws2_32 -lwinmm -lwldap32
+
+DISTFILES += \
+    source/json/sconscript \
+    conf/config.ini \
+    conf/config.json \
+    data/testjson.json \
+    data/testjsonarray.json \
+    data/example.json

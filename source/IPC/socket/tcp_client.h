@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #include <WinSock2.h>
 #include <fstream>

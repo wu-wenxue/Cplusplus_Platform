@@ -49,22 +49,22 @@ private:
 
 #define WXLOG_INFO(logger,message) { \
     ostringstream oss; \
-    oss << message;   \
+    oss << __FUNCTION__ << ", " << message;   \
     logger->WxLog(INFO,oss);}
 
 #define WXLOG_WARN(logger,message) { \
     ostringstream oss; \
-    oss << message;   \
+    oss << __FUNCTION__ << ", " << message;   \
     logger->WxLog(WARN,oss);}
 
 #define WXLOG_ERROR(logger,message) { \
     ostringstream oss; \
-    oss << message;   \
+    oss << __FUNCTION__ << ", " << message;   \
     logger->WxLog(ERR,oss);}
 
 #define WXLOG_FATAL(logger,message) { \
     ostringstream oss; \
-    oss << message;   \
+    oss << __FUNCTION__ << ", " << message;   \
     logger->WxLog(FATAL,oss);}
 
 

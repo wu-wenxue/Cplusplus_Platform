@@ -1,6 +1,8 @@
 #ifndef EPOLL_SERVER_H
 #define EPOLL_SERVER_H
 
+#if defined(__unix__) || defined(unix)
+
 #include <stdio.h>
 #include <iostream>
 #include <unistd.h>
@@ -35,5 +37,5 @@ private:
     struct epoll_event* m_epoll_events;
 };
 
-
+#endif
 #endif // EPOLL_SERVER_H
