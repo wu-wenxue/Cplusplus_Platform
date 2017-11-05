@@ -37,7 +37,6 @@ Wxlogger* Wxlogger::getInstance()
 {
     if(NULL == _instance)
     {
-        std::cout << "debug : " << "getInstance" << std::endl;
         _instance = new Wxlogger();
     }
     return _instance;
