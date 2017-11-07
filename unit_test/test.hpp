@@ -4,6 +4,7 @@
 #include "ping/ping.h"
 #include "thread/thread_linux.h"
 #include "thread/thread_windows.h"
+#include "test_zlib.hpp"
 
 int test_log()
 {
@@ -28,7 +29,7 @@ int test_log()
 
 int test_ping()
 {
-#ifdef WIN32
+#ifdef _WIN32
     Ping objPing;
 
     char *szDestIP = "192.168.8.1";
@@ -80,10 +81,7 @@ void test_socket_client()
 #ifdef WIN32
     TCPClient* client = new TCPClient("192.168.8.111",80);
     client->Connect();
-    string str = "GET /FTP/SBox-3G_-LE_-20171101120000.tar.gz HTTP/1.1  \
-            Host: 192.168.8.111:81  \
-            User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0  \
-            Accept: */*  \
+    string str = "GET /FTP/SBox-3G_-LE_-20171101120000.tar.gz HTTP/1.1\nHost: 192.168.8.111:81\n  User-Agent: Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:56.0) Gecko/20100101 Firefox/56.0  \            Accept: */*  \
             Accept-Language: zh-CN,zh;q=0.8,en-US;q=0.5,en;q=0.3  \
             Accept-Encoding: gzip, deflate  \
             Connection: keep-alive  \
@@ -94,8 +92,12 @@ void test_socket_client()
 #endif
 }
 
+
+
 #include "json_test.hpp"
 
+#include "test_zlib2.hpp"
+#include "file_test.hpp"
 
 void test2()
 {
@@ -107,6 +109,11 @@ void test2()
 
     jsontest();
 
+    test_zlib();
+
+    test_main1();
+
+    test_file();
 }
 
 #endif // TEST_HPP

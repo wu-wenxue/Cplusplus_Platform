@@ -1,0 +1,15 @@
+void MainWindow::on_pushButton_2_clicked()
+{
+    QByteArray src;
+    src.append("中华人民共和国,china mobile,123456 ");
+    unsigned long len_compress;
+    unsigned long len_uncompress;
+    unsigned char *buffer_compress  = new unsigned char[MaxBufferSize];
+    unsigned char *buffer_uncompress = new unsigned char[MaxBufferSize];
+    compress(buffer_compress,&len_compress,(Bytef*)src.data(), src.length());
+    uncompress(buffer_uncompress,&len_uncompress,buffer_compress,len_compress);
+    qDebug() << "qt zlib:"  ;
+    qDebug() << "src:\n" << src.data() << ",length:" << src.size() ;
+    qDebug() << "compress:\n" << buffer_compress << ",length:" << len_compress ;
+    qDebug() << "uncompress:\n" << buffer_uncompress << ",length:" << len_uncompress ;
+}

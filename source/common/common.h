@@ -9,4 +9,6 @@ void wxsleep_ms(unsigned int n);
 // 去除字符串两边的空格
 void trimString(std::string &str);
 
+std::string int2string(int i);
+
 #endif // COMMON_H

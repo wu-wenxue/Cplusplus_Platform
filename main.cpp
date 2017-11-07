@@ -10,13 +10,13 @@ using namespace std;
 int main()
 {
     Wxlogger* logger = Wxlogger::getInstance();
-    logger->SetLogName(".","test.log");
+    logger->SetLogName("./log/","test.log");
     logger->SetLogLevel(INFO);
 
     cout << "hello" << endl;
     test2();
-    http_test();
+//    http_test();
 
-    wxsleep(5);
+//    wxsleep(5);
     cout << "hello" << endl;
 }

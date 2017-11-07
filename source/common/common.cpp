@@ -1,4 +1,5 @@
 #include "common.h"
+#include <string>
 
 #if defined(__unix__) || defined(unix)
 #include <unistd.h>
@@ -37,4 +38,25 @@ void trimString(std::string &str)
     int s = str.find_first_not_of(" ");
     int e = str.find_last_not_of(" ");
     str = str.substr(s,e-s+1);
+}
+
+#include <strstream>
+
+std::string int2string(int i)
+{
+    std::string s;
+    std::strstream ss;
+    ss<<i;
+    ss>>s;
+
+    return s;
+}
+
+std::string int_to_string2(int i)
+{
+    char ch[10] = {0};
+    sprintf(ch, "%d", i);
+    std::string s(ch);
+
+    return s;
 }

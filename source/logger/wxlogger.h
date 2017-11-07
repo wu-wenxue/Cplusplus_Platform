@@ -28,12 +28,15 @@ public:
 
     void WxLog(loglevel level, ostringstream& oss);
 
-    void SetLogName(string path,string filename);
+    void SetLogName(const string path,const string filename);
     void SetLogLevel(loglevel level);
+    void SetLogFileSize(const int size);
+    void SetLogSaveCount(const int n);
+    int getLogFileSize();
 
 protected:
     Wxlogger();
-
+    void BackLogFile();
 private:
     string GetCurrentTime_();
     string GetCurrentTime_byms();
@@ -42,6 +45,8 @@ private:
     string m_Path;
     loglevel m_level;
     mutex mut;
+    int m_logFileSize;
+    int m_logSaveCount;
 
 private:
     static Wxlogger* _instance;

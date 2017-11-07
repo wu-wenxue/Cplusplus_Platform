@@ -41,7 +41,11 @@ HEADERS += \
     source/threadpool/Task.h \
     source/threadpool/TaskContainer.h \
     unit_test/threadpool_test.hpp \
-    unit_test/json_test.hpp
+    unit_test/json_test.hpp \
+    unit_test/test_zlib.hpp \
+    unit_test/test_zlib2.hpp \
+    source/fileop/fileop.h \
+    unit_test/file_test.hpp
 
 SOURCES += \
     source/platform.cpp \
@@ -71,15 +75,18 @@ SOURCES += \
     source/threadpool/MyThread.cpp \
     source/threadpool/MyThreadPool.cpp \
     source/threadpool/Task.cpp \
-    source/threadpool/TaskContainer.cpp
+    source/threadpool/TaskContainer.cpp \
+    source/fileop/fileop.cpp
 
 win32{
 
-INCLUDEPATH += ./deploy/windows/curllib/include
+INCLUDEPATH += ./deploy/windows/curllib/include  \
+               ./deploy/windows/zlib/include
 
 LIBS += -lwsock32
-LIBS += -lpthread libwsock32 libws2_32
+LIBS += libwsock32 libws2_32
 LIBS += E:\Project\C++\Cplusplus_Platform\deploy\windows\curllib\lib\libcurl.dll
+LIBS += E:\Project\C++\Cplusplus_Platform\deploy\windows\zlib\Debug\lib\libzlib.dll
 
 }
 
