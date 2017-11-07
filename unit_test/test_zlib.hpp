@@ -81,7 +81,7 @@ void test_zlib3()
 {
     Wxlogger* logger = Wxlogger::getInstance();
     string str;
-    str.append("中华人民共和国,china mobile,123456 ");
+    str.append("中华人民共和国,china mobile,123456 中华人民共和国 中华人民共和国 中华人民共和国");
 
     unsigned long len_compress;
     unsigned long len_uncompress;

@@ -3,6 +3,7 @@
 #include <sstream>
 #include <iostream>
 #include "common/common.h"
+#include <string.h>
 
 #define COMMENT_CHAR '#'
 
@@ -47,6 +48,32 @@ bool Config::AnalyseLine(const std::string & line, std::string & value)
     trimString(value);
 
 
+    if(key.compare("logLevel") == 0)
+    {
+        if(value.compare("info") == 0) logLevel = 0;
+        if(value.compare("debug") == 0) logLevel = 1;
+        if(value.compare("warn") == 0) logLevel = 2;
+        if(value.compare("error") == 0) logLevel = 3;
+        if(value.compare("fatal") == 0) logLevel = 4;
+    }
+    if(key.compare("logFilePath") == 0)
+    {
+        logFilePath = value;
+    }
+    if(key.compare("logFileName") == 0)
+    {
+        logFileName = value;
+    }
+    if(key.compare("logFileSize") == 0)
+    {
+        logFileSize = string2int(value);
+    }
+    if(key.compare("logFileBackCount") == 0)
+    {
+        logFileBackCount = string2int(value);
+    }
+
+
 }
 
 // 读取数据
@@ -69,3 +96,28 @@ bool Config::ReadConfig(const std::string& filename)
     return true;
 }
 
+
+int Config::GetLogLevel()
+{
+    return logLevel;
+}
+
+std::string Config::GetLogFilePath()
+{
+    return logFilePath;
+}
+
+std::string Config::GetLogFileName()
+{
+    return logFileName;
+}
+
+int Config::GetLogFileSize()
+{
+    return logFileSize;
+}
+
+int Config::GetLogFileBackCount()
+{
+    return logFileBackCount;
+}

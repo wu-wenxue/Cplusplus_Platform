@@ -13,6 +13,7 @@ using namespace std;
 typedef enum LogLevel
 {
     INFO = 0,
+    DEBUG,
     WARN,
     ERR,
     FATAL,
@@ -25,6 +26,8 @@ public:
     static Wxlogger* getInstance();
 
     ~Wxlogger();
+
+    void init();
 
     void WxLog(loglevel level, ostringstream& oss);
 
@@ -56,6 +59,11 @@ private:
     ostringstream oss; \
     oss << __FUNCTION__ << ", " << message;   \
     logger->WxLog(INFO,oss);}
+
+#define WXLOG_DEBUG(logger,message) { \
+    ostringstream oss; \
+    oss << __FUNCTION__ << ", " << message;   \
+    logger->WxLog(DEBUG,oss);}
 
 #define WXLOG_WARN(logger,message) { \
     ostringstream oss; \

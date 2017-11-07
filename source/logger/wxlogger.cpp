@@ -5,6 +5,7 @@
 #include "fileop/fileop.h"
 #include "common/common.h"
 #include "zlib.h"
+#include "config/config.h"
 
 #if defined(__unix__) || defined(unix)
 #include <sys/time.h>
@@ -22,6 +23,16 @@ Wxlogger::Wxlogger()
     m_level = INFO;
     m_logFileSize = 30*1024;
     m_logSaveCount = 2;
+}
+
+void Wxlogger::init()
+{
+    Config* config = Config::getInstance();
+
+    SetLogName(config->GetLogFilePath(),config->GetLogFileName());
+    SetLogFileSize(config->GetLogFileSize());
+    SetLogLevel((loglevel)config->GetLogLevel());
+    SetLogSaveCount(config->GetLogFileBackCount());
 }
 
 void Wxlogger::SetLogName(string path,string filename)
@@ -83,6 +94,15 @@ void Wxlogger::WxLog(loglevel level, ostringstream &oss)
         if(outfile.is_open())
         {
             outfile << "[INFO ] " << this->GetCurrentTime_byms().data()  <<" : "<< oss.str() << std::endl;
+        }
+    }
+        break;
+    case DEBUG:
+    {
+        if(level < m_level) break;
+        if(outfile.is_open())
+        {
+            outfile << "[DEBUG] " << this->GetCurrentTime_byms().data() << " : " << oss.str() << std::endl;
         }
     }
         break;

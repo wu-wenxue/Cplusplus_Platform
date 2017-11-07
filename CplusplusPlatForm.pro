@@ -45,7 +45,14 @@ HEADERS += \
     unit_test/test_zlib.hpp \
     unit_test/test_zlib2.hpp \
     source/fileop/fileop.h \
-    unit_test/file_test.hpp
+    unit_test/file_test.hpp \
+    source/zlib/crypt.h \
+    source/zlib/ioapi.h \
+    source/zlib/iowin32.h \
+    source/zlib/mztools.h \
+    source/zlib/unzip.h \
+    source/zlib/zip.h \
+    unit_test/zip_test/iowin32.h
 
 SOURCES += \
     source/platform.cpp \
@@ -76,7 +83,14 @@ SOURCES += \
     source/threadpool/MyThreadPool.cpp \
     source/threadpool/Task.cpp \
     source/threadpool/TaskContainer.cpp \
-    source/fileop/fileop.cpp
+    source/fileop/fileop.cpp \
+    source/zlib/ioapi.c \
+    source/zlib/mztools.c \
+    source/zlib/unzip.c \
+    source/zlib/zip.c \
+    unit_test/zip_test/iowin32.c \
+    unit_test/zip_test/miniunz.c \
+    unit_test/zip_test/minizip.c
 
 win32{
 

@@ -60,3 +60,12 @@ std::string int_to_string2(int i)
 
     return s;
 }
+
+int string2int(std::string str)
+{
+    int i = 0;
+    std::strstream ss;
+    ss << str;
+    ss >> i;
+    return i;
+}

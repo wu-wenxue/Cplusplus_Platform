@@ -8,4 +8,6 @@ public:
     platform();
 };
 
+bool platform_init();
+
 #endif // PLATFORM_H

@@ -98,6 +98,7 @@ void test_socket_client()
 
 #include "test_zlib2.hpp"
 #include "file_test.hpp"
+#include "common/common.h"
 
 void test2()
 {
@@ -114,6 +115,11 @@ void test2()
     test_main1();
 
     test_file();
+
+    string str = "hello";
+
+    cout << "string compare : " << str.compare("hello") <<endl;
+    cout << "string 4 to int : " << string2int("4") << endl;
 }
 
 #endif // TEST_HPP

@@ -11,4 +11,6 @@ void trimString(std::string &str);
 
 std::string int2string(int i);
 
+int string2int(std::string str);
+
 #endif // COMMON_H
