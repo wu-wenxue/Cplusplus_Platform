@@ -41,5 +41,7 @@ public:
 
     static bool renameFolder(const string& old_folder_name, const string& new_folder_name);
 
+    static string getFileNameFromPath(const string& path);
+
 };
 #endif // FILEOP_H

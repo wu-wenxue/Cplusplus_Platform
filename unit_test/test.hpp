@@ -99,27 +99,27 @@ void test_socket_client()
 #include "test_zlib2.hpp"
 #include "file_test.hpp"
 #include "common/common.h"
+#include "zip_test/test_zip.hpp"
 
 void test2()
 {
 //    test_log();
-//    std::cout << "Hello World" << endl;
+
 //    test_ping();
 
 //    test_thread_windows();
 
-    jsontest();
+//    jsontest();
 
-    test_zlib();
+//    test_zlib();
 
-    test_main1();
+//    test_main1();
 
-    test_file();
+//    test_file();
 
-    string str = "hello";
+    test_zip();
 
-    cout << "string compare : " << str.compare("hello") <<endl;
-    cout << "string 4 to int : " << string2int("4") << endl;
+
 }
 
 #endif // TEST_HPP

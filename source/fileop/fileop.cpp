@@ -84,7 +84,7 @@ void WxFileOp::getJustCurrentFile( string path, vector<string>& files)
 }
 
 
-// 只读取某给定路径下的所有文件名(即包含当前目录及子目录的文件)
+// 只读取某给定路径下的所有文件名(即包含当前目录及子目录的文件) 带路径
 void WxFileOp::getFilesAll( string path, vector<string>& files)
 {
     //文件句柄
@@ -163,6 +163,25 @@ bool WxFileOp::renameFolder(const string& old_folder_name,const string& new_fold
 {
     rename(old_folder_name.data(),new_folder_name.data());
     return pathIsExist(new_folder_name);
+}
+
+string WxFileOp::getFileNameFromPath(const string& path)
+{
+    string filename;
+    const char* tmpptr = path.c_str();
+    const char* lastslash = NULL;
+    for(;*tmpptr;tmpptr++)
+    {
+        if(*tmpptr == '\\' || *tmpptr == '/')
+        {
+            lastslash = tmpptr;
+        }
+    }
+    if(NULL != lastslash)
+    {
+        filename += (lastslash + 1);
+    }
+    return filename;
 }
 
 

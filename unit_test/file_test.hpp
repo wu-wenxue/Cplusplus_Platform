@@ -4,6 +4,7 @@
 #include "fileop/fileop.h"
 #include <windows.h>
 #include "common/common.h"
+#include "logger/wxlogger.h"
 
 void test_file1()
 {
@@ -56,12 +57,13 @@ void test_file1()
 
 void test_file2()
 {
+    Wxlogger* logger = Wxlogger::getInstance();
     vector<string> fileList;
     WxFileOp::getAllFiles("./data",fileList);
 //    string file;
     for (auto file : fileList)
     {
-        cout << file <<endl;
+        WXLOG_WARN(logger,file);
     }
 
     cout << endl;
@@ -70,21 +72,36 @@ void test_file2()
     WxFileOp::getFilesAll("./debug",fileList2);
     for(auto file : fileList2)
     {
-        cout << file << endl;
+        WXLOG_WARN(logger,file);
     }
 
+    vector<string> fileList3;
+    WxFileOp::getJustCurrentFile("./data",fileList3);
+    for(auto file : fileList3)
+    {
+        WXLOG_WARN(logger, file);
+    }
+
+    vector<string> dirs;
+    WxFileOp::getJustCurrentDir("./data",dirs);
+    for(auto dir : dirs)
+    {
+        WXLOG_WARN(logger,dir);
+    }
 }
 
+
+void test_file3()
+{
+    cout << WxFileOp::getFileNameFromPath("./data/test.txt") << endl;
+}
 
 void test_file()
 {
 
-//    test_file2();
+    test_file2();
 
-    string str = "name";
-    int i = 0;
-    string temp_name = str + "." + int2string(i);
-    cout << "tmep_name : " << temp_name << endl;
+    test_file3();
 }
 
 #endif // FILE_TEST_HPP

@@ -245,11 +245,9 @@ int isLargeFile(const char* filename)
  return largeFile;
 }
 
-#if 0
+#if 1
 
-int main(argc,argv)
-    int argc;
-    char *argv[];
+int main1(int argc, char *argv[])
 {
     int i;
     int opt_overwrite=0;
@@ -425,7 +423,7 @@ int main(argc,argv)
 
                 zip64 = isLargeFile(filenameinzip);
 
-                                                         /* The path name saved, should not include a leading slash. */
+                /* The path name saved, should not include a leading slash. */
                /*if it did, windows/xp and dynazip couldn't read the zip file. */
                  savefilenameinzip = filenameinzip;
                  while( savefilenameinzip[0] == '\\' || savefilenameinzip[0] == '/' )

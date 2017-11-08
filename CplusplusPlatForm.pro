@@ -52,7 +52,9 @@ HEADERS += \
     source/zlib/mztools.h \
     source/zlib/unzip.h \
     source/zlib/zip.h \
-    unit_test/zip_test/iowin32.h
+    unit_test/zip_test/iowin32.h \
+    unit_test/zip_test/test_zip.hpp \
+    source/zlib/wxzip.h
 
 SOURCES += \
     source/platform.cpp \
@@ -90,7 +92,8 @@ SOURCES += \
     source/zlib/zip.c \
     unit_test/zip_test/iowin32.c \
     unit_test/zip_test/miniunz.c \
-    unit_test/zip_test/minizip.c
+    unit_test/zip_test/minizip.c \
+    source/zlib/wxzip.cpp
 
 win32{
 
