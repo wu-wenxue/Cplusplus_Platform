@@ -9,12 +9,13 @@ TCPClient::TCPClient(std::string server_ip, int port)
 	m_server_ip = server_ip;
 	m_port = port;
 	Init();
+    Connect();
 }
 
 
 TCPClient::~TCPClient()
 {
-
+    close();
 }
 
 bool TCPClient::Init()
@@ -36,6 +37,17 @@ bool TCPClient::Init()
 		std::cout << "Socket() error : " << WSAGetLastError() << std::endl;
 		return false;
 	}
+
+    int nNetTimeout = 1000;  // 1s
+    if(SOCKET_ERROR == setsockopt(sockClient,SOL_SOCKET,SO_SNDTIMEO,(char*)&nNetTimeout,sizeof(int)))
+    {
+        std::cout << "Failed to set send timeout " << std::endl;
+    }
+    if(SOCKET_ERROR == setsockopt(sockClient,SOL_SOCKET,SO_RCVTIMEO,(char*)&nNetTimeout,sizeof(int)))
+    {
+        std::cout << "Failed to set recv timeout " << std::endl;
+    }
+
 	return true;
 }
 
@@ -49,7 +61,7 @@ bool TCPClient::Connect()
 
 //	std::thread t(onRecvMessage, this);
 //	t.detach();
-	return true;
+    return true;
 }
 /*
 void TCPClient::StartRecvProcess(WebSocket_Client* ws_client)
@@ -66,7 +78,7 @@ void TCPClient::onSendMessage(std::string message)
 
 }
 
-void TCPClient::onRecvMessage(void* instance)
+void TCPClient::onRecvMessage2(void* instance)
 {
 	std::cout << "recv thread is start ...." << std::endl;
     TCPClient* client = static_cast<TCPClient*>(instance);
@@ -78,6 +90,7 @@ void TCPClient::onRecvMessage(void* instance)
 		{
 			memset(recv_buf, 0, sizeof(recv_buf));
 			int len = recv(client->GetSocket(), recv_buf, sizeof(recv_buf)-1, 0);
+
 			recv_buf[len] = '\0';
 			message += recv_buf;
 			if (len < sizeof(recv_buf))
@@ -95,14 +108,19 @@ void TCPClient::onRecvMessage(void* instance)
 	}
 }
 
-int TCPClient::Recv(std::string& recv_message)
+int TCPClient::onRecvMessage(std::string& recv_message)
 {
 	char recv_buf[1024] = { 0 };
 	int count = 0;
 	while (1)
 	{
 		memset(recv_buf, 0, sizeof(recv_buf));
-		int len = recv(sockClient, recv_buf, sizeof(recv_buf)-1, 0);
+        int len = recv(sockClient, recv_buf, sizeof(recv_buf)-1, MSG_WAITALL);
+        std::cout << "recv len : " << len << std::endl;
+        if(-1 == len)
+        {
+            break;
+        }
 		recv_buf[len] = '\0';
 		count += len;
 		recv_message += recv_buf;

@@ -24,9 +24,9 @@ public:
 
     //	void StartRecvProcess(WebSocket_Client* ws_client);
 
-    static void onRecvMessage(void* instance);
+    static void onRecvMessage2(void* instance);
 
-    int Recv(std::string& recv_message);
+    int onRecvMessage(std::string& recv_message);
     void close();
 
     SOCKET GetSocket();

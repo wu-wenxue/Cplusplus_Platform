@@ -100,6 +100,7 @@ void test_socket_client()
 #include "file_test.hpp"
 #include "common/common.h"
 #include "zip_test/test_zip.hpp"
+#include "test_socket.hpp"
 
 void test2()
 {
@@ -117,7 +118,9 @@ void test2()
 
 //    test_file();
 
-    test_zip();
+//    test_zip();
+
+    test_socket();
 
 
 }

@@ -54,7 +54,9 @@ HEADERS += \
     source/zlib/zip.h \
     unit_test/zip_test/iowin32.h \
     unit_test/zip_test/test_zip.hpp \
-    source/zlib/wxzip.h
+    source/zlib/wxzip.h \
+    source/IPC/socket/wxtcp_client.h \
+    unit_test/test_socket.hpp
 
 SOURCES += \
     source/platform.cpp \
@@ -93,7 +95,8 @@ SOURCES += \
     unit_test/zip_test/iowin32.c \
     unit_test/zip_test/miniunz.c \
     unit_test/zip_test/minizip.c \
-    source/zlib/wxzip.cpp
+    source/zlib/wxzip.cpp \
+    source/IPC/socket/wxtcp_client.cpp
 
 win32{
 
