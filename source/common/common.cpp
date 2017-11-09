@@ -1,5 +1,6 @@
 #include "common.h"
 #include <string>
+#include <thread>
 
 #if defined(__unix__) || defined(unix)
 #include <unistd.h>
@@ -30,6 +31,34 @@ void wxsleep_ms(unsigned int n)
 #ifdef _WIN32
     Sleep(n);
 #endif
+}
+
+void thread_sleep(unsigned int n,char type)
+{
+    switch(type)
+    {
+    case HOURS:
+        std::this_thread::sleep_for(std::chrono::hours(n));
+        break;
+    case MINUTES:
+        std::this_thread::sleep_for(std::chrono::minutes(n));
+        break;
+    case SECONDS:
+        std::this_thread::sleep_for(std::chrono::seconds(n));
+        break;
+    case MILLISECONDS:
+        std::this_thread::sleep_for(std::chrono::milliseconds(n));
+        break;
+    case MICROSECONDS:
+        std::this_thread::sleep_for(std::chrono::microseconds(n));
+        break;
+    case NANOSECONDS:
+        std::this_thread::sleep_for(std::chrono::nanoseconds(n));
+        break;
+    default:
+        break;
+
+    }
 }
 
 

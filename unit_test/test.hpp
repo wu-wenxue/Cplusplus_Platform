@@ -101,6 +101,8 @@ void test_socket_client()
 #include "common/common.h"
 #include "zip_test/test_zip.hpp"
 #include "test_socket.hpp"
+#include "test_thread.hpp"
+
 
 void test2()
 {
@@ -120,7 +122,9 @@ void test2()
 
 //    test_zip();
 
-    test_socket();
+//    test_socket();
+
+    test_thread();
 
 
 }
