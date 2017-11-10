@@ -8,7 +8,7 @@
 
 using namespace std;
 
-class MyTask2: public Task
+class MyTask2: public Task1
 {
 public:
     virtual void run(void* arg)

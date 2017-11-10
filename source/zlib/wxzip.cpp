@@ -2,10 +2,11 @@
 #include "fileop/fileop.h"
 #include "logger/wxlogger.h"
 
-Wxlogger* logger = Wxlogger::getInstance();
+
 
 void compressFile(const std::string& zipfilename,const std::string& filename )
 {
+    Wxlogger* logger = Wxlogger::getInstance();
     string savename = WxFileOp::getFileNameFromPath(filename);
     zipFile zf = zipOpen(zipfilename.c_str(),APPEND_STATUS_CREATE);
     if(NULL == zf)
@@ -51,6 +52,7 @@ void compressFile(const std::string& zipfilename,const std::string& filename )
 
 void compressFolder(const std::string& zipfilename,const std::string& path)
 {
+    Wxlogger* logger = Wxlogger::getInstance();
     std::vector<string> files;
     WxFileOp::getJustCurrentFile(path,files);
 

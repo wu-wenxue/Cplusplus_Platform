@@ -58,7 +58,8 @@ HEADERS += \
     source/IPC/socket/wxtcp_client.h \
     unit_test/test_socket.hpp \
     source/thread/c++11_thread.h \
-    unit_test/test_thread.hpp
+    unit_test/test_thread.hpp \
+    source/threadpool/wxthreadpool.h
 
 SOURCES += \
     source/platform.cpp \
@@ -99,7 +100,8 @@ SOURCES += \
     unit_test/zip_test/minizip.c \
     source/zlib/wxzip.cpp \
     source/IPC/socket/wxtcp_client.cpp \
-    source/thread/c++11_thread.cpp
+    source/thread/c++11_thread.cpp \
+    source/threadpool/wxthreadpool.cpp
 
 win32{
 

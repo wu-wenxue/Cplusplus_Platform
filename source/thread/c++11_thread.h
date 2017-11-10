@@ -2,7 +2,8 @@
 #define C11_THREAD_H
 #include <thread>
 
-class Task
+
+class Task1
 {
 public:
     virtual void run(void* arg) = 0;
@@ -11,43 +12,21 @@ public:
 class Cxx11Thread
 {
 public:
-    Cxx11Thread(Task* task)
-    {
-        m_task = task;
-        m_running = 1;
-    }
+    Cxx11Thread(Task1* task);
+    ~Cxx11Thread();
 
-    void start()
-    {
-        t = std::thread(std::bind(&Cxx11Thread::run,this));
-    }
+    void start();
 
-    void thread_detach()
-    {
-        t.detach();
-    }
+    void thread_detach();
 
-    void thread_stop()
-    {
-        if(true == t.joinable())
-        {
-            m_running = false;
-            t.join();
-        }
-    }
-
-
+    void thread_stop();
 
 protected:
 
-    void run()
-    {
-
-        m_task->run(&m_running);
-    }
+    void run();
 
 private:
-    Task *m_task;
+    Task1 *m_task;
     std::thread t;
     int m_running;
 };

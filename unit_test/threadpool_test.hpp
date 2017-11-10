@@ -47,5 +47,46 @@ int threadpool_test()
     system("pause");
 }
 
+#include "threadpool/wxthreadpool.h"
+#include "logger/wxlogger.h"
+#include "common/common.h"
+
+Wxlogger* logger = Wxlogger::getInstance();
+
+class MyWxTask : public WxTask
+{
+public:
+    MyWxTask(int n)
+    {
+        m_num = n;
+    }
+
+    virtual void run()
+    {
+        Wxlogger* logger = Wxlogger::getInstance();
+        for(int i = 0;i < m_num; i++)
+        {
+//            thread_sleep(1);
+            WXLOG_WARN(logger,"(" << std::this_thread::get_id() << ") " << " this task is running " << i);
+        }
+    }
+
+private:
+    int m_num;
+};
+
+void test_wxthreadpool()
+{
+
+    WxThreadPool* tp = new WxThreadPool(4);
+
+    for(int i = 0; i < 20; i++)
+    {
+        MyWxTask* task = new MyWxTask(100000);
+        tp->addTask(task);
+    }
+
+    thread_sleep(100);
+}
 
 #endif // THREADPOOL_TEST_HPP
