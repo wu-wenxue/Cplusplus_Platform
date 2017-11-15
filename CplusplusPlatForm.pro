@@ -59,7 +59,11 @@ HEADERS += \
     unit_test/test_socket.hpp \
     source/thread/c++11_thread.h \
     unit_test/test_thread.hpp \
-    source/threadpool/wxthreadpool.h
+    source/threadpool/wxthreadpool.h \
+    source/xml/tinyxml2.h \
+    unit_test/test_xml.hpp \
+    unit_test/test_log.hpp \
+    unit_test/test_ping.hpp
 
 SOURCES += \
     source/platform.cpp \
@@ -101,7 +105,8 @@ SOURCES += \
     source/zlib/wxzip.cpp \
     source/IPC/socket/wxtcp_client.cpp \
     source/thread/c++11_thread.cpp \
-    source/threadpool/wxthreadpool.cpp
+    source/threadpool/wxthreadpool.cpp \
+    source/xml/tinyxml2.cpp
 
 win32{
 
@@ -143,4 +148,5 @@ DISTFILES += \
     conf/config.json \
     data/testjson.json \
     data/testjsonarray.json \
-    data/example.json
+    data/example.json \
+    data/test.xml

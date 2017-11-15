@@ -44,4 +44,35 @@ void test_thread()
     test_thread1();
 }
 
+#include "thread/thread_linux.h"
+#include "thread/thread_windows.h"
+
+class R:public Runnable
+{
+public:
+    ~R()
+    {
+        std::cout << "~R" << endl;
+    }
+    void Run()
+    {
+        std::cout << "Hello World" << endl;
+    }
+};
+
+void test_thread_windows()
+{
+#ifdef _WIN32
+    R r;
+    CThread *t = NULL;
+    t = new CThread(&r);
+    t->Start();
+    t->Join();
+#endif
+}
+
+
+
+
+
 #endif // TEST_THREAD_HPP
