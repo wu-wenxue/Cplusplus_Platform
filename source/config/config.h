@@ -14,7 +14,7 @@ public:
     std::string GetLogFilePath();
     std::string GetLogFileName();
     int GetLogFileSize();
-    int GetLogFileBackCount();
+    int GetLogFileBackupCount();
 
 protected:
     Config();
@@ -26,7 +26,7 @@ private:
    std::string logFilePath;
    std::string logFileName;
    int logFileSize;
-   int logFileBackCount;
+   int logFileBackupCount;
 };
 
 #endif // CONFIG_H
