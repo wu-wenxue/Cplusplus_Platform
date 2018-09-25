@@ -34,13 +34,13 @@ void test2()
 
 //    test_zip();
 
-//    test_socket();
+    test_socket();
 
 //    test_thread();
 
 //    test_wxthreadpool();
 
-    test_xml();
+//    test_xml();
 }
 
 #endif // TEST_HPP

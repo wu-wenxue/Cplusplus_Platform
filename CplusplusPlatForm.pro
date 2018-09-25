@@ -4,6 +4,8 @@ TARGET = C++platfrom
 INCLUDEPATH += ./source \
                ./unit_test
 
+DEFINES += LOG_ZLIB
+
 
 
 HEADERS += \
@@ -115,8 +117,10 @@ INCLUDEPATH += ./deploy/windows/curllib/include  \
 
 LIBS += -lwsock32
 LIBS += libwsock32 libws2_32
-LIBS += E:\Project\C++\Cplusplus_Platform\deploy\windows\curllib\lib\libcurl.dll
-LIBS += E:\Project\C++\Cplusplus_Platform\deploy\windows\zlib\Debug\lib\libzlib.dll
+LIBS += D:\Developer\Project\C++\Cplusplus_Platform\deploy\windows\curllib\lib/libcurl.dll
+#LIBS += ./deploy/windows/curllib/lib/libcurl.dll
+LIBS += D:\Developer\Project\C++\Cplusplus_Platform\deploy\windows/zlib/Debug/lib/libzlib.dll
+#LIBS += ./deploy/windows/zlib/Debug/lib/libzlib.dll
 
 }
 

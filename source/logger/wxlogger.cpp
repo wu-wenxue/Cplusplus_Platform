@@ -2,10 +2,14 @@
 #include <fstream>"
 #include <stdio.h>
 #include <iostream>
-#include "fileop/fileop.h"
+
 #include "common/common.h"
-#include "zlib.h"
 #include "config/config.h"
+
+#ifdef LOG_ZLIB
+    #include "zlib.h"
+    #include "fileop/fileop.h"
+#endif
 
 #if defined(__unix__) || defined(unix)
 #include <sys/time.h>
@@ -32,7 +36,7 @@ void Wxlogger::init()
     SetLogName(config->GetLogFilePath(),config->GetLogFileName());
     SetLogFileSize(config->GetLogFileSize());
     SetLogLevel((loglevel)config->GetLogLevel());
-    SetLogSaveCount(config->GetLogFileBackCount());
+    SetLogSaveCount(config->GetLogFileBackupCount());
 }
 
 void Wxlogger::SetLogName(string path,string filename)

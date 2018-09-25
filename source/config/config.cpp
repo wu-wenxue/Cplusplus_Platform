@@ -68,9 +68,9 @@ bool Config::AnalyseLine(const std::string & line, std::string & value)
     {
         logFileSize = string2int(value);
     }
-    if(key.compare("logFileBackCount") == 0)
+    if(key.compare("logFileBackupCount") == 0)
     {
-        logFileBackCount = string2int(value);
+        logFileBackupCount = string2int(value);
     }
 
 
@@ -117,7 +117,7 @@ int Config::GetLogFileSize()
     return logFileSize;
 }
 
-int Config::GetLogFileBackCount()
+int Config::GetLogFileBackupCount()
 {
-    return logFileBackCount;
+    return logFileBackupCount;
 }

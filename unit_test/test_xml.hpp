@@ -128,29 +128,30 @@ int insertXMLNode(const char* xmlPath,const User& user)
 //return：用户节点
 XMLElement* queryUserNodeByName(XMLElement* root,const string& userName)
 {
-    XMLElement* userNode = root->FirstChildElement("User");
+    tinyxml2::XMLElement* userNode = root->FirstChildElement("User");
     while(userNode != NULL)
     {
         if(userNode->Attribute("Name") == userName)
         {
             break;
         }
-        userNode = userNode->NextSibilingElement();  // 下一个兄弟节点
+        userNode = userNode->NextSiblingElement();  // 下一个兄弟节点
+
     }
     return userNode;
 }
 
 User* queryUserByName(const char* xmlPath,const string& userName)
 {
-    XMLDocument doc;
+    tinyxml2::XMLDocument doc;
     if(doc.LoadFile(xmlPath) != 0)
     {
         cout << "load xml file failed " << endl;
         return NULL;
     }
 
-    XMLElement* root=doc.RootElement();
-    XMLElement* userNode = queryUserNodeByName(root,userName);
+    tinyxml2::XMLElement* root=doc.RootElement();
+    tinyxml2::XMLElement* userNode = queryUserNodeByName(root,userName);
 
     if(userNode != NULL) // searched successfully
     {
@@ -159,8 +160,8 @@ User* queryUserByName(const char* xmlPath,const string& userName)
         user->password = userNode->Attribute("Password");
         XMLElement* genderNode = userNode->FirstChildElement("Gender");
         user->gender = atoi(genderNode->GetText());
-        XMLElement& mobileNode = userNode->FirstChildElement("Mobile");
-        user->mobile = mobileNode.GetText();
+        XMLElement* mobileNode = userNode->FirstChildElement("Mobile");
+        user->mobile = mobileNode->GetText();
         XMLElement* emailNode = userNode->FirstChildElement("Email");
         user->email = emailNode->GetText();
         return user;
@@ -174,21 +175,21 @@ User* queryUserByName(const char* xmlPath,const string& userName)
 //return：bool
 bool updateUser(const char* xmlPath,User* user)
 {
-    XMLDocument doc;
+    tinyxml2::XMLDocument doc;
     if(doc.LoadFile(xmlPath) != 0)
     {
         cout <<"load xml file failed " <<endl;
         return false;
     }
 
-    XMLElement* root = doc.RootElement();
-    XMLElement* userNode = queryUserNodeByName(root,user->userName);
+    tinyxml2::XMLElement* root = doc.RootElement();
+    tinyxml2::XMLElement* userNode = queryUserNodeByName(root,user->userName);
 
-    if(userName != NULL)
+    if(userNode != NULL)
     {
         if(user->password != userNode->Attribute("Password"))
         {
-            userNode->SetAttribute("Password",usr.password.c_str()); // modify property
+            userNode->SetAttribute("Password",user->password.c_str()); // modify property
         }
         XMLElement* genderNode = userNode->FirstChildElement("Gender");
         if(user->gender != atoi(genderNode->GetText()))
@@ -229,7 +230,7 @@ void test_xml3()
 //return：bool
 bool deleteUserByName(const char* xmlPath,const string& username)
 {
-    XMLDocument doc;
+    tinyxml2::XMLDocument doc;
     if(doc.LoadFile(xmlPath) != 0)
     {
         cout << "load xml file failed " << endl;
@@ -258,7 +259,7 @@ void test_xml4()
     else
         cout << "delete failed " << endl;
 
-    return 0;
+    return ;
 }
 
 //function:获取xml文件申明
@@ -266,7 +267,7 @@ void test_xml4()
 //return：bool
 bool getXMLDeclaration(const char* xmlPath,string& strDecl)
 {
-    XMLDocument doc;
+    tinyxml2::XMLDocument doc;
     if(doc.LoadFile(xmlPath) != 0)
     {
         cout << "load xml file failed" << endl;
@@ -292,14 +293,14 @@ void test_xml5()
     {
         cout << "declaration: " << strDecl << endl;
     }
-    return 0;
+    return ;
 }
 
 //function:将xml文件内容输出到标准输出
 //param:xmlPath:xml文件路径
 void print(const char* xmlPath)
 {
-    XMLDocument doc;
+    tinyxml2::XMLDocument doc;
     if(doc.LoadFile("./user.xml") != 0)
     {
         cout << "load xml file failed " << endl;
