@@ -7,8 +7,14 @@
 #include <sstream>
 #include <strstream>
 
+#ifdef DLLAPI
+#else
+#define DLLAPI __declspec(dllimport)
+#endif
 
 using namespace std;
+
+namespace wwxlog{
 
 typedef enum LogLevel
 {
@@ -55,31 +61,6 @@ private:
     static Wxlogger* _instance;
 };
 
-#define WXLOG_INFO(logger,message) { \
-    ostringstream oss; \
-    oss << __FUNCTION__ << ", " << message;   \
-    logger->WxLog(INFO,oss);}
-
-#define WXLOG_DEBUG(logger,message) { \
-    ostringstream oss; \
-    oss << __FUNCTION__ << ", " << message;   \
-    logger->WxLog(DEBUG,oss);}
-
-#define WXLOG_WARN(logger,message) { \
-    ostringstream oss; \
-    oss << __FUNCTION__ << ", " << message;   \
-    logger->WxLog(WARN,oss);}
-
-#define WXLOG_ERROR(logger,message) { \
-    ostringstream oss; \
-    oss << __FUNCTION__ << ", " << message;   \
-    logger->WxLog(ERR,oss);}
-
-#define WXLOG_FATAL(logger,message) { \
-    ostringstream oss; \
-    oss << __FUNCTION__ << ", " << message;   \
-    logger->WxLog(FATAL,oss);}
-
-
+}
 
 #endif // WXLOGGER_H

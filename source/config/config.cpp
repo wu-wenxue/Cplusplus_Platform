@@ -47,33 +47,7 @@ bool Config::AnalyseLine(const std::string & line, std::string & value)
     trimString(key);
     trimString(value);
 
-
-    if(key.compare("logLevel") == 0)
-    {
-        if(value.compare("info") == 0) logLevel = 0;
-        if(value.compare("debug") == 0) logLevel = 1;
-        if(value.compare("warn") == 0) logLevel = 2;
-        if(value.compare("error") == 0) logLevel = 3;
-        if(value.compare("fatal") == 0) logLevel = 4;
-    }
-    if(key.compare("logFilePath") == 0)
-    {
-        logFilePath = value;
-    }
-    if(key.compare("logFileName") == 0)
-    {
-        logFileName = value;
-    }
-    if(key.compare("logFileSize") == 0)
-    {
-        logFileSize = string2int(value);
-    }
-    if(key.compare("logFileBackupCount") == 0)
-    {
-        logFileBackupCount = string2int(value);
-    }
-
-
+    map_info[key] = value;
 }
 
 // 读取数据
@@ -82,10 +56,8 @@ bool Config::ReadConfig(const std::string& filename)
     std::ifstream infile(filename);
     if(!infile)
     {
-//        LOG4CXX_ERROR(logger,"config file open error");
         return false;
     }
-//    LOG4CXX_INFO(logger,"config file open sucess!");
     std::string line,value;
     while(getline(infile,line))
     {
@@ -96,28 +68,9 @@ bool Config::ReadConfig(const std::string& filename)
     return true;
 }
 
-
-int Config::GetLogLevel()
+int Config::GetParameterByKey(std::string key,std::string& value)
 {
-    return logLevel;
+    value = map_info[key];
+    return 0;
 }
 
-std::string Config::GetLogFilePath()
-{
-    return logFilePath;
-}
-
-std::string Config::GetLogFileName()
-{
-    return logFileName;
-}
-
-int Config::GetLogFileSize()
-{
-    return logFileSize;
-}
-
-int Config::GetLogFileBackupCount()
-{
-    return logFileBackupCount;
-}

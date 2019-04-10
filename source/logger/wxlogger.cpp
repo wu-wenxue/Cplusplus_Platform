@@ -42,9 +42,14 @@ void Wxlogger::init()
 void Wxlogger::SetLogName(string path,string filename)
 {
 //    m_Path = path;
-    if(!WxFileOp::pathIsExist(path))
+
+    DIR* dir;
+    if(dir = opendir(path.data()) == NULL)
     {
-        while(!WxFileOp::createFolder(path)) break;
+        while(opendir(path.data()) != NULL)
+        {
+            mkdir(path.data());
+        }
     }
 
     if(filename.empty())

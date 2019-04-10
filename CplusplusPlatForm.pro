@@ -65,7 +65,8 @@ HEADERS += \
     source/xml/tinyxml2.h \
     unit_test/test_xml.hpp \
     unit_test/test_log.hpp \
-    unit_test/test_ping.hpp
+    unit_test/test_ping.hpp \
+    source/logger/wxlogger_def.h
 
 SOURCES += \
     source/platform.cpp \
