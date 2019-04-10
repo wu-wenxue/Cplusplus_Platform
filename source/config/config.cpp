@@ -47,7 +47,9 @@ bool Config::AnalyseLine(const std::string & line, std::string & value)
     trimString(key);
     trimString(value);
 
+
     map_info[key] = value;
+
 }
 
 // 读取数据
